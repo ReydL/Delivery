@@ -56,7 +56,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           ),
         ],
       ),
-      body: screens[currentIndex],
+      body: IndexedStack(
+        index: currentIndex,
+        children: screens,
+      ),
     );
   }
 }

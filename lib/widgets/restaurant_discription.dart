@@ -32,44 +32,42 @@ class RestaurantDiscription extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          Container(
-            padding: EdgeInsets.only(top: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 91,
-                  height: 23,
-                  margin: EdgeInsets.only(left: 12,right: 7),
-                  decoration: BoxDecoration(
-                    color: Colors.black87,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text('10-20 минут',
-                    style:TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 14,
-                      color: Colors.white,
-                    ) ,),
+          SizedBox(height: 12,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: 91,
+                height: 23,
+                margin: EdgeInsets.only(left: 12,right: 7),
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  width: 136,
-                  height: 23,
-                  decoration: BoxDecoration(
-                    color: Colors.black87,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text('Доставка: 100 Р',
-                    style:TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 14,
-                      color: Colors.white,
-                    ) ,),
+                child: Text('10-20 минут',
+                  style:TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 14,
+                    color: Colors.white,
+                  ) ,),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: 136,
+                height: 23,
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-              ],
-            ),
+                child: Text('Доставка: 100 Р',
+                  style:TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 14,
+                    color: Colors.white,
+                  ) ,),
+              ),
+            ],
           )
         ],
       ),

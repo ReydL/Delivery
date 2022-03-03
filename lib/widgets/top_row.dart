@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:delivery/pages/profile_screen.dart';
 
 class TopRow extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,6 +25,7 @@ class TopRow extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Nunito',
                   fontSize: 16,
+                  color: Colors.black,
                 ),),
             )
           ],

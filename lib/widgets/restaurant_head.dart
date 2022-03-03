@@ -5,10 +5,9 @@ class RestaurantHead extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 150,
       width: 375,
-
       child: Stack(
         children: [
           Container(

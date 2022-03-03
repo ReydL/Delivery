@@ -1,9 +1,8 @@
-
 import 'package:delivery/widgets/bottom_navigation.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'pages/main_screen.dart';
 import 'pages/restaurant_screen.dart';
 
 void main() {
@@ -23,5 +22,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

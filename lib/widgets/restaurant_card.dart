@@ -1,8 +1,46 @@
-
-
 import 'package:flutter/material.dart';
 
+class ListOfRestaurantCard extends StatelessWidget {
+
+  final List<RestaurantCardData> cards = [
+    RestaurantCardData(image: 'assets/images/Rectangle.png', logo: 'assets/images/BKlogo.png',
+        nameOfRestaurant: 'Burger King',typeOfKitchen:  'Американская кухня',
+        timeOfDelivery:  '10-20 минут', costOfDelivery: 'Доставка: 100 Р'),
+    RestaurantCardData(image: 'assets/images/Rectangle.png', logo: 'assets/images/BKlogo.png',
+        nameOfRestaurant: 'Burger King',typeOfKitchen:  'Американская кухня',
+        timeOfDelivery:  '15-20 минут', costOfDelivery: 'Доставка: 200 Р'),
+    RestaurantCardData(image: 'assets/images/Rectangle.png', logo: 'assets/images/BKlogo.png',
+        nameOfRestaurant: 'Burger King',typeOfKitchen:  'Американская кухня',
+        timeOfDelivery:  '15-30 минут', costOfDelivery: 'Доставка: 150 Р'),
+  ];
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ...cards.map((data) => RestaurantCard(data: data)),
+      ],
+    );
+  }
+}
+
+class RestaurantCardData {
+  final String image;
+  final String logo;
+  final String nameOfRestaurant;
+  final String typeOfKitchen;
+  final String timeOfDelivery;
+  final String costOfDelivery;
+
+  RestaurantCardData({required this.image,required this.logo,required this.nameOfRestaurant,
+     required this.typeOfKitchen,required this.timeOfDelivery,required this.costOfDelivery});
+}
+
 class RestaurantCard extends StatelessWidget {
+  final RestaurantCardData data;
+
+  const RestaurantCard({Key? key,required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,8 +68,8 @@ class RestaurantCard extends StatelessWidget {
                   margin: EdgeInsets.fromLTRB(6, 6, 6, 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/Rectangle.png'),
+                    image: DecorationImage(
+                      image: AssetImage(data.image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -44,8 +82,8 @@ class RestaurantCard extends StatelessWidget {
                         margin: EdgeInsets.fromLTRB(6, 6, 6, 6),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(7),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/BKlogo.png'),
+                          image: DecorationImage(
+                            image: AssetImage(data.logo),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -56,7 +94,7 @@ class RestaurantCard extends StatelessWidget {
                 Container(
                   child: ListTile(
                     title: Text(
-                      'Burger King',
+                      data.nameOfRestaurant,
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'Nunito',
@@ -64,7 +102,7 @@ class RestaurantCard extends StatelessWidget {
                       ),
                     ),
                     subtitle: Text(
-                      'Американская кухня',
+                      data.typeOfKitchen,
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: 'Nunito',
@@ -86,7 +124,7 @@ class RestaurantCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Text(
-                          '10-20 минут',
+                          data.timeOfDelivery,
                           style: TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 14,
@@ -103,7 +141,7 @@ class RestaurantCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Text(
-                          'Доставка: 100 Р',
+                          data.costOfDelivery,
                           style: TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 14,

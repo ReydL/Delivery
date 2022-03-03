@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 class FastDel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 41,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          MyCategory(),
-          MyCategory(),
-          MyCategory(),
-          MyCategory(),
+          SizedBox(width: 16,),
+          MyCategory(text: 'Быстрая доставка',),
+          MyCategory(text: 'Быстрая доставка',),
+          MyCategory(text: 'Быстрая доставка',),
+          MyCategory(text: 'Быстрая доставка',),
         ],
       ),
     );
@@ -19,7 +20,9 @@ class FastDel extends StatelessWidget {
 }
 
 class MyCategory extends StatelessWidget {
-  const MyCategory({Key? key}) : super(key: key);
+  final String text;
+  const MyCategory({Key? key,
+  required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +32,12 @@ class MyCategory extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.black12,width: 1),
         color: Colors.white70,
       ),
-      margin: EdgeInsets.only(left: 16, right: 7),
+      margin: EdgeInsets.only(right: 7),
       child: Text(
-        'Быстрая доставка',
+        text,
         style: TextStyle(
           fontSize: 16,
           fontFamily: 'Nunito',
