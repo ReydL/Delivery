@@ -47,6 +47,7 @@ class Description extends StatelessWidget {
   const Description({Key? key,required this.data }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, '/restaurant');
@@ -98,18 +99,11 @@ class Description extends StatelessWidget {
                 child: ListTile(
                   title: Text(
                     data.nameOfRestaurant,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Nunito',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700),
                   ),
                   subtitle: Text(
                     data.typeOfKitchen,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'Nunito',
-                    ),
+                    style: theme.textTheme.subtitle1,
                   ),
                   trailing: Icon(Icons.attach_money),
                 ),

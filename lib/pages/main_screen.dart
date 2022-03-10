@@ -17,9 +17,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.backgroundColor,
       appBar:AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.backgroundColor,
         title: TopRow(),
       ),
       body: ListView(
@@ -34,11 +36,7 @@ class _MainScreenState extends State<MainScreen> {
                 padding: EdgeInsets.only(top: 19),
                 child: Text(
                   'Самые популярные',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: theme.textTheme.headline5,
                 ),
               ),
               CardsBurger(),
@@ -47,11 +45,7 @@ class _MainScreenState extends State<MainScreen> {
                 padding: EdgeInsets.only(top: 32),
                 child: Text(
                   'Рекомендуем вам',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style:  theme.textTheme.headline5,
                 ),
               ),
               Recomindation(),
@@ -60,11 +54,7 @@ class _MainScreenState extends State<MainScreen> {
                 padding: EdgeInsets.only(top: 36, bottom: 16),
                 child: Text(
                   'Все рестораны',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style:  theme.textTheme.headline5,
                 ),
               ),
               ListOfRestaurantCard(),

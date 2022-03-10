@@ -1,6 +1,8 @@
+import 'package:delivery/config/app_theme.dart';
+
+
 import 'package:delivery/widgets/bottom_navigation.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/restaurant_screen.dart';
@@ -15,10 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: DeliveryAppTheme.of(context),
       routes: {
         '/': (context) => MyBottomNavigationBar(),
         '/restaurant': (context) => RestaurantScreen(),
       },
+      //home: IfRender(),
     );
   }
 }

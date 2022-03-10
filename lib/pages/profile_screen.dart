@@ -13,6 +13,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: Container(
         child: ListView(
@@ -26,20 +27,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Text(
                           'Михаил Павлович Тереньтьев',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 16,
-                          ),
+                          style: theme.textTheme.bodyText1,
                         ),
                         SizedBox(
                           height: 5,
                         ),
                         Text(
                           '+7 (934) 283 84-29',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 14,
-                          ),
+                          style: theme.textTheme.subtitle1,
                         ),
                         SizedBox(
                           height: 40,
@@ -58,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           child: ListTile(
                             onTap: () {},
-                            title: Text('Мои заказы'),
+                            title: Text('Мои заказы', style: theme.textTheme.bodyText1,),
                             leading: Container(
                               width: 40,
                               height: 40,
@@ -83,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           child: ListTile(
                             onTap: () {},
-                            title: Text('Настройки'),
+                            title: Text('Настройки', style: theme.textTheme.bodyText1,),
                             leading: Container(
                               width: 40,
                               height: 40,

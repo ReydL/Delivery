@@ -26,6 +26,7 @@ class MyCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       width: 163,
       height: 41,
@@ -38,10 +39,7 @@ class MyCategory extends StatelessWidget {
       margin: EdgeInsets.only(right: 7),
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: 16,
-          fontFamily: 'Nunito',
-        ),
+        style: theme.textTheme.bodyText1,
       ),
     );
   }

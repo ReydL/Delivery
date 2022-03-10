@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:delivery/pages/profile_screen.dart';
+
 
 class TopRow extends StatelessWidget {
 
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
         padding: EdgeInsets.only(top: 12,bottom: 14),
 
@@ -22,11 +23,7 @@ class TopRow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(7),
               ),
               child: Text('Можайская, 250',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 16,
-                  color: Colors.black,
-                ),),
+                style: theme.textTheme.subtitle1,),
             )
           ],
         )

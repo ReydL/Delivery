@@ -19,41 +19,40 @@ class RestaurantScreen extends StatefulWidget {
 class _RestaurantScreenState extends State<RestaurantScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.backgroundColor,
         title: TopRow(),
       ),
-      body: Container(
-        child: ListView(
-          children: [
-            Container(
-              child: Column(
-                children: [
-                  RestaurantHead(),
-                  RestaurantDiscription(),
-                  SizedBox(height: 30,),
-                  TypeOfDish(),
-                  SizedBox(height: 29,),
-                  Row(
-                    children: [
-                      SizedBox(width: 12,),
-                      Text('Бургеры',
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                      SizedBox(height: 16,),
-                    ],
-                  ),
-                  ColumnOfDishes(),
+      body: ListView(
+        children: [
+          Container(
+            child: Column(
+              children: [
+                RestaurantHead(),
+                RestaurantDiscription(),
+                SizedBox(height: 30,),
+                TypeOfDish(),
+                SizedBox(height: 29,),
+                Row(
+                  children: [
+                    SizedBox(width: 12,),
+                    Text('Бургеры',
+                      style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),),
+                    SizedBox(height: 16,),
+                  ],
+                ),
+                ColumnOfDishes(),
 
-                ],
-              ) ,
-            )
-          ],
-        )
+              ],
+            ) ,
+          )
+        ],
       ),
     );
   }

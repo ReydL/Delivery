@@ -12,6 +12,7 @@ class _BuildBurgerBottomSheetState extends State<BuildBurgerBottomSheet> {
   bool value = false;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: SizedBox(
@@ -32,7 +33,7 @@ class _BuildBurgerBottomSheetState extends State<BuildBurgerBottomSheet> {
                   onPressed: (){},
                 ),
               ),
-              Text('1'),
+              Text('3'),
               Container(
                 margin: EdgeInsets.only(left: 20,top: 15,bottom: 15,right: 15),
 
@@ -47,18 +48,18 @@ class _BuildBurgerBottomSheetState extends State<BuildBurgerBottomSheet> {
                   onPressed: (){},
                 ),
               ),
-              SizedBox(width: 50,),
+              Expanded(child: SizedBox()),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.orange,
-                    onPrimary: Colors.white,
+                    primary: theme.primaryColor,
+                    onPrimary: theme.backgroundColor,
 
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     )
                 ),
                 onPressed: (){},
-                child: Text('Добавить за 500 Р'),
+                child: Text('Добавить'),
               ),
 
             ],
@@ -90,7 +91,9 @@ class _BuildBurgerBottomSheetState extends State<BuildBurgerBottomSheet> {
                       ),
                       child: IconButton(
                         icon: Icon(Icons.close),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ),
                     Container(

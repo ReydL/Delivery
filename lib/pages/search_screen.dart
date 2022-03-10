@@ -11,9 +11,10 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.backgroundColor,
         title: TopRow(),
       ),
       body: ListView(children: [
@@ -28,14 +29,9 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Text(
               'Популярный выбор',
-              style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
-              ),
+              style:  theme.textTheme.headline5,
             ),
-
-            //GridOfRestaurants()
+            GridOfRestaurants()
           ],
         ),
       ]),
@@ -46,19 +42,25 @@ class _SearchScreenState extends State<SearchScreen> {
 class GridOfRestaurants extends StatelessWidget {
   final List <ElementOfGridRestaurantsData> elements = [
     ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
   ];
   GridOfRestaurants({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      padding: EdgeInsets.all(20),
-      crossAxisCount: 3,
-      mainAxisSpacing: 9,
-      crossAxisSpacing: 30,
-      children: [
-        ...elements.map((data) => ElementOfGridRestaurants(data: data))
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 20),
+      child: Wrap(
+        spacing: 30,
+        runSpacing: 10,
+        children: [
+          ...elements.map((data) => ElementOfGridRestaurants(data: data))
+        ],
+      ),
     );
   }
 }
@@ -88,6 +90,7 @@ class ElementOfGridRestaurants extends StatelessWidget{
               ),
             ),
           ),
+          SizedBox(height: 5,),
           Text(
             data.nameOfImage,
             style: TextStyle(
@@ -107,27 +110,21 @@ class RowOfSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       child: ListTile(
         leading: Icon(
           Icons.search,
           size: 35,
+          color: theme.primaryColor,
         ),
         title: Text(
           'Ищите в поиске',
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
+          style: theme.textTheme.subtitle1,
         ),
         subtitle: Text(
           'Например, свинные ребрышки',
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600),
         ),
       ),
     );
