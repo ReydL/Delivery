@@ -7,6 +7,7 @@ class RestaurantDiscription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
 
       alignment: Alignment.center,
@@ -17,19 +18,12 @@ class RestaurantDiscription extends StatelessWidget {
         children: [
           Text(
             'Burger King',
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-            ),
+            style: theme.textTheme.headline5,
             textAlign: TextAlign.center,
           ),
           Text(
             'Большой выбор бургеров, картошки\n и прочего, что вам нравится',
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 14,
-            ),
+            style: theme.textTheme.subtitle1,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 12,),

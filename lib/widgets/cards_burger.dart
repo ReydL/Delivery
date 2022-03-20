@@ -64,6 +64,7 @@ class Description extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Card(
+          color: theme.bottomNavigationBarTheme.backgroundColor,
           child: Column(
             children: [
               Container(

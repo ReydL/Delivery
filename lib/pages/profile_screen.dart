@@ -1,5 +1,4 @@
-
-
+import 'package:delivery/config/user_preference.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -9,12 +8,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.backgroundColor,
       body: Container(
         child: ListView(
           children: [
@@ -48,12 +46,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 76,
                           width: 355,
                           decoration: BoxDecoration(
+                            color:
+                                theme.bottomNavigationBarTheme.backgroundColor,
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.black12, width: 1),
                           ),
                           child: ListTile(
                             onTap: () {},
-                            title: Text('Мои заказы', style: theme.textTheme.bodyText1,),
+                            title: Text(
+                              'Мои заказы',
+                              style: theme.textTheme.bodyText1,
+                            ),
                             leading: Container(
                               width: 40,
                               height: 40,
@@ -73,12 +76,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 76,
                           width: 355,
                           decoration: BoxDecoration(
+                            color:
+                                theme.bottomNavigationBarTheme.backgroundColor,
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.black12, width: 1),
                           ),
                           child: ListTile(
-                            onTap: () {},
-                            title: Text('Настройки', style: theme.textTheme.bodyText1,),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/settings');
+                            },
+                            title: Text(
+                              'Настройки',
+                              style: theme.textTheme.bodyText1,
+                            ),
                             leading: Container(
                               width: 40,
                               height: 40,
@@ -109,11 +119,19 @@ class AdressRow extends StatefulWidget {
 }
 
 class _AdressRowState extends State<AdressRow> {
-  String adress = 'Можайская, 250';
-
+  String address = 'Можайская, 250';
+  final _storage = UserPreference();
   String preadress = '';
+
+  @override
+  void initState()  {
+    super.initState();
+
+    //address =  _storage.getAddress();
+  }
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       alignment: Alignment.center,
       width: 355,
@@ -122,6 +140,7 @@ class _AdressRowState extends State<AdressRow> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Card(
+        color: theme.bottomNavigationBarTheme.backgroundColor,
         child: ListTile(
           title: Text(
             'Адрес для доставки',
@@ -131,12 +150,8 @@ class _AdressRowState extends State<AdressRow> {
             ),
           ),
           subtitle: Text(
-            adress,
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 16,
-              fontWeight: FontWeight.normal,
-            ),
+            address,
+            style: theme.textTheme.bodyText1,
           ),
           trailing: TextButton(
             onPressed: () {
@@ -144,13 +159,10 @@ class _AdressRowState extends State<AdressRow> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
+                      backgroundColor: theme.backgroundColor,
                       title: Text(
                         'Укажите адрес доставки: ',
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
+                        style: theme.textTheme.bodyText1,
                       ),
                       content: TextField(
                         onChanged: (String value) {
@@ -159,16 +171,19 @@ class _AdressRowState extends State<AdressRow> {
                       ),
                       actions: [
                         TextButton(
-                            child: Text('Изменить'),
-                            onPressed: () {
-                              setState(() {
-                                adress = preadress;
-                              });
-
+                            child: Text(
+                              'Изменить',
+                              style: theme.textTheme.subtitle1!
+                                  .copyWith(color: theme.primaryColor),
+                            ),
+                            onPressed: () async {
+                              await _storage.setAddress(preadress);
                               Navigator.of(context).pop();
                             }),
                         TextButton(
-                            child: Text('Отмена'),
+                            child: Text('Отмена',
+                                style: theme.textTheme.subtitle1!
+                                    .copyWith(color: theme.primaryColor)),
                             onPressed: () {
                               Navigator.of(context).pop();
                             }),
@@ -178,11 +193,8 @@ class _AdressRowState extends State<AdressRow> {
             },
             child: Text(
               'Редактировать',
-              style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 14,
-                color: Colors.orange,
-              ),
+              style: theme.textTheme.subtitle1!
+                  .copyWith(color: theme.primaryColor),
             ),
           ),
         ),
@@ -190,4 +202,3 @@ class _AdressRowState extends State<AdressRow> {
     );
   }
 }
-

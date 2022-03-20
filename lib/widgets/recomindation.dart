@@ -36,6 +36,7 @@ class RecBox extends StatelessWidget {
   const RecBox({Key? key, required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -55,10 +56,7 @@ class RecBox extends StatelessWidget {
           ),
           Text(
             data.text,
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 14,
-            ),
+            style: theme.textTheme.subtitle1,
             textAlign: TextAlign.center,
             softWrap: true,
           ),

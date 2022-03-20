@@ -10,6 +10,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Map'),),);
+    return Scaffold(
+      appBar: AppBar(title: Text('Map'),),);
   }
 }

@@ -21,6 +21,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.backgroundColor,
       appBar: AppBar(
         backgroundColor: theme.backgroundColor,
         title: TopRow(),
@@ -39,11 +40,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   children: [
                     SizedBox(width: 12,),
                     Text('Бургеры',
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),),
+                      style: theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700)),
                     SizedBox(height: 16,),
                   ],
                 ),

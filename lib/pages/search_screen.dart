@@ -13,6 +13,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.backgroundColor,
       appBar: AppBar(
         backgroundColor: theme.backgroundColor,
         title: TopRow(),
@@ -71,11 +72,13 @@ class ElementOfGridRestaurantsData {
   ElementOfGridRestaurantsData({required this.image,required this.nameOfImage});
 }
 class ElementOfGridRestaurants extends StatelessWidget{
+
   final ElementOfGridRestaurantsData data;
   const ElementOfGridRestaurants({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       child: Column(
         children: [
@@ -93,11 +96,7 @@ class ElementOfGridRestaurants extends StatelessWidget{
           SizedBox(height: 5,),
           Text(
             data.nameOfImage,
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-            ),
+            style: theme.textTheme.subtitle1,
           )
         ],
       ),

@@ -67,7 +67,9 @@ class _MyFlexContainerState extends State<MyFlexContainer> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
+      color: theme.bottomNavigationBarTheme.backgroundColor,
       padding: EdgeInsets.only(bottom: 15),
+      margin: EdgeInsets.only(bottom: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

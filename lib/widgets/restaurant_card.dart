@@ -43,6 +43,7 @@ class RestaurantCard extends StatelessWidget {
   const RestaurantCard({Key? key,required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       width: 363,
       height: 260,
@@ -59,6 +60,7 @@ class RestaurantCard extends StatelessWidget {
           Navigator.pushNamed(context, '/restaurant');
         },
         child: Card(
+          color: theme.bottomNavigationBarTheme.backgroundColor,
           child: Container(
             child: Column(
               children: [

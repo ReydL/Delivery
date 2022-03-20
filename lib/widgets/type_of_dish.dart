@@ -34,6 +34,7 @@ class MyType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: EdgeInsets.only(right: 7),
 
@@ -41,14 +42,12 @@ class MyType extends StatelessWidget {
       height: 41,
       width: 97,
       decoration: BoxDecoration(
+        color: Colors.white70,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(width: 1,color: Colors.black12),
       ),
       child: Text(this.type,
-      style: TextStyle(
-        fontSize: 16,
-        fontFamily: 'Nunito',
-      ),),
+      style: Theme.of(context).textTheme.bodyText1),
     );
   }
 }
