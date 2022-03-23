@@ -20,19 +20,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      builder:(context,_) {
-        final themeProvider = Provider.of<ThemeProvider>(context);
-        return MaterialApp(
-        themeMode: themeProvider.themeMode,
-        theme: LightAppTheme.of(context),
-        darkTheme: DarkAppTheme.of(context),
-        routes: {
-          '/': (context) => MyBottomNavigationBar(),
-          '/restaurant': (context) => RestaurantScreen(),
-          '/settings': (context) => SettingsPage(),
+      create: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context,ThemeProvider themeProvider,child){
+          return MaterialApp(
+            themeMode: themeProvider.themeMode,
+            theme: LightAppTheme.of(context),
+            darkTheme: DarkAppTheme.of(context),
+            routes: {
+              '/': (context) => MyBottomNavigationBar(),
+              '/restaurant': (context) => RestaurantScreen(),
+              '/settings': (context) => SettingsPage(),
+            },
+          );
         },
-      );}
+      ),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:delivery/config/user_preference.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -119,7 +120,7 @@ class AdressRow extends StatefulWidget {
 }
 
 class _AdressRowState extends State<AdressRow> {
-  String address = 'Можайская, 250';
+  String? address;
   final _storage = UserPreference();
   String preadress = '';
 
@@ -127,7 +128,8 @@ class _AdressRowState extends State<AdressRow> {
   void initState()  {
     super.initState();
 
-    //address =  _storage.getAddress();
+    getAddress();
+   // print(address);
   }
   @override
   Widget build(BuildContext context) {
@@ -149,8 +151,8 @@ class _AdressRowState extends State<AdressRow> {
               fontSize: 10,
             ),
           ),
-          subtitle: Text(
-            address,
+          subtitle: address == null ? Text('') : Text(
+            address!,
             style: theme.textTheme.bodyText1,
           ),
           trailing: TextButton(
@@ -176,9 +178,11 @@ class _AdressRowState extends State<AdressRow> {
                               style: theme.textTheme.subtitle1!
                                   .copyWith(color: theme.primaryColor),
                             ),
-                            onPressed: () async {
-                              await _storage.setAddress(preadress);
+                            onPressed: () {
+                              _storage.setAddress(preadress);
                               Navigator.of(context).pop();
+                              setState(() {
+                              });
                             }),
                         TextButton(
                             child: Text('Отмена',
@@ -201,4 +205,20 @@ class _AdressRowState extends State<AdressRow> {
       ),
     );
   }
+
+
+  void getAddress() async{
+  final storage = await SharedPreferences.getInstance();
+
+  setState(() {
+    address = storage.getString(PreferenceKeys.address);
+  });
+  print (address);
+}
+
+//   Future<void> getAddress() async {
+//
+//     final addressTwo = await _storage.getAddress();
+//     setState(() => address = addressTwo);
+//   }
 }
