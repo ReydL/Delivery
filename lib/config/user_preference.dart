@@ -12,21 +12,17 @@ class UserPreference {
   Future<void> setAddress(String address) async {
     final storage = await _storage;
     storage.setString(PreferenceKeys.address, address);
-    print(address);
+    print('это setAddress $address');
   }
 
-  // Future<String?> getAddress() async{
-  //   final storage = await _storage;
-  //    final address = storage.getString(PreferenceKeys.address);
-  //   // return address;
-  //
-  //   return  Future.value(address);
-  //
-  // }
-
-  Future <void> setThemeMode(bool value) async{
+  Future<String?> getAddress() async{
     final storage = await _storage;
-    storage.setBool(PreferenceKeys.themeMode, value);
+     final address = storage.getString(PreferenceKeys.address);
+     return address;
+
+   // return  Future.value(address);
+
   }
+
 
 }

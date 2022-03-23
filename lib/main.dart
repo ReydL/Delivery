@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         builder: (context,ThemeProvider themeProvider,child){
           return MaterialApp(
-            themeMode: themeProvider.themeMode,
+            themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light ,
             theme: LightAppTheme.of(context),
             darkTheme: DarkAppTheme.of(context),
             routes: {

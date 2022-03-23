@@ -1,3 +1,5 @@
+
+
 import 'package:delivery/config/user_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -128,6 +130,7 @@ class _AdressRowState extends State<AdressRow> {
   void initState()  {
     super.initState();
 
+
     getAddress();
    // print(address);
   }
@@ -157,6 +160,7 @@ class _AdressRowState extends State<AdressRow> {
           ),
           trailing: TextButton(
             onPressed: () {
+              getAddress();
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -179,9 +183,10 @@ class _AdressRowState extends State<AdressRow> {
                                   .copyWith(color: theme.primaryColor),
                             ),
                             onPressed: () {
-                              _storage.setAddress(preadress);
-                              Navigator.of(context).pop();
                               setState(() {
+                                address = preadress;
+                                _storage.setAddress(preadress);
+                                Navigator.of(context).pop();
                               });
                             }),
                         TextButton(
@@ -207,18 +212,15 @@ class _AdressRowState extends State<AdressRow> {
   }
 
 
-  void getAddress() async{
-  final storage = await SharedPreferences.getInstance();
-
-  setState(() {
-    address = storage.getString(PreferenceKeys.address);
-  });
-  print (address);
-}
-
-//   Future<void> getAddress() async {
+//   void getAddress() async{
+//   final storage = await SharedPreferences.getInstance();
+//   address = storage.getString(PreferenceKeys.address);
 //
-//     final addressTwo = await _storage.getAddress();
-//     setState(() => address = addressTwo);
-//   }
+//   print ('это getAdress $address');
+// }
+
+  Future<void> getAddress() async {
+    final addressTwo = await _storage.getAddress();
+    setState(() => address = addressTwo);
+  }
 }
