@@ -1,9 +1,13 @@
-import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
 
 class RestaurantDiscription extends StatelessWidget {
-  const RestaurantDiscription({Key? key}) : super(key: key);
+  final String name;
+  final String discription;
+  final String? timeOfDel;
+  final String? costOfDel;
+  const RestaurantDiscription({Key? key,required this.name,required this.discription, this.timeOfDel, this.costOfDel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +21,12 @@ class RestaurantDiscription extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Burger King',
+            this.name,
             style: theme.textTheme.headline5,
             textAlign: TextAlign.center,
           ),
           Text(
-            'Большой выбор бургеров, картошки\n и прочего, что вам нравится',
+            this.discription,
             style: theme.textTheme.subtitle1,
             textAlign: TextAlign.center,
           ),
@@ -39,7 +43,7 @@ class RestaurantDiscription extends StatelessWidget {
                   color: Colors.black87,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Text('10-20 минут',
+                child: Text(this.timeOfDel ?? '',
                   style:TextStyle(
                     fontFamily: 'Nunito',
                     fontSize: 14,
@@ -54,7 +58,7 @@ class RestaurantDiscription extends StatelessWidget {
                   color: Colors.black87,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Text('Доставка: 100 Р',
+                child: Text(this.costOfDel ?? '',
                   style:TextStyle(
                     fontFamily: 'Nunito',
                     fontSize: 14,

@@ -1,22 +1,20 @@
 
-import 'dart:ui';
-
-import 'package:delivery/widgets/top_row.dart';
-import 'package:delivery/widgets/type_of_dish.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/flex_container.dart';
-import '../widgets/restaurant_discription.dart';
-import '../widgets/restaurant_head.dart';
+import '../../widgets/flex_container.dart';
+import '../../widgets/restaurant_discription.dart';
+import '../../widgets/restaurant_head.dart';
+import '../../widgets/top_row.dart';
+import '../../widgets/type_of_dish.dart';
 
-class RestaurantScreen extends StatefulWidget {
-  const RestaurantScreen({Key? key}) : super(key: key);
 
-  @override
-  _RestaurantScreenState createState() => _RestaurantScreenState();
-}
+class RestaurantScreen extends StatelessWidget {
+  final String name;
+  final String typeOfKitchen;
+  final String? timeOfDel;
+  final String? costOfDel;
+  const RestaurantScreen({Key? key,required this.name,required this.typeOfKitchen, this.timeOfDel, this.costOfDel}) : super(key: key);
 
-class _RestaurantScreenState extends State<RestaurantScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -32,7 +30,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             child: Column(
               children: [
                 RestaurantHead(),
-                RestaurantDiscription(),
+                RestaurantDiscription(name: this.name,discription: this.typeOfKitchen,timeOfDel: this.timeOfDel,costOfDel: this.costOfDel,),
                 SizedBox(height: 30,),
                 TypeOfDish(),
                 SizedBox(height: 29,),
@@ -40,7 +38,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   children: [
                     SizedBox(width: 12,),
                     Text('Бургеры',
-                      style: theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700)),
+                        style: theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700)),
                     SizedBox(height: 16,),
                   ],
                 ),
@@ -54,3 +52,5 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
     );
   }
 }
+
+

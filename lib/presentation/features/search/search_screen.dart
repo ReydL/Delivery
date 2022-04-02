@@ -1,5 +1,7 @@
-import 'package:delivery/widgets/top_row.dart';
+
 import 'package:flutter/material.dart';
+
+import '../../widgets/top_row.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);

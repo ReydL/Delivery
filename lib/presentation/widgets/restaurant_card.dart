@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../features/restaurant/restaurant_screen.dart';
+
 class ListOfRestaurantCard extends StatelessWidget {
 
   final List<RestaurantCardData> cards = [
@@ -57,7 +59,11 @@ class RestaurantCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, '/restaurant');
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RestaurantScreen(
+                  name: data.nameOfRestaurant,
+                  typeOfKitchen: data.typeOfKitchen,costOfDel: data.costOfDelivery,timeOfDel: data.timeOfDelivery,)));
         },
         child: Card(
           color: theme.bottomNavigationBarTheme.backgroundColor,

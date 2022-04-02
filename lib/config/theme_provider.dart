@@ -25,7 +25,7 @@ class ThemeProvider extends ChangeNotifier{
   saveTheme() async{
     await initialize();
     prefs?.setBool(PreferenceKeys.themeMode, isDarkMode);
-    print(isDarkMode);
+
   }
 
   void toggleTheme(bool isOn){

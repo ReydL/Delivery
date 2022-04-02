@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/cards_burger.dart';
-import '../widgets/fast_del.dart';
-import '../widgets/grey_containers.dart';
-import '../widgets/recomindation.dart';
-import '../widgets/restaurant_card.dart';
-import '../widgets/top_row.dart';
+import '../../widgets/cards_burger.dart';
+import '../../widgets/fast_del.dart';
+import '../../widgets/grey_containers.dart';
+import '../../widgets/recomindation.dart';
+import '../../widgets/restaurant_card.dart';
+import '../../widgets/top_row.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

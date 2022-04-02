@@ -1,56 +1,69 @@
+import 'package:delivery/presentation/features/restaurant/restaurant_screen.dart';
 import 'package:flutter/material.dart';
 
 class CardsBurger extends StatefulWidget {
-
-
   @override
   State<CardsBurger> createState() => _CardsBurgerState();
 }
 
 class _CardsBurgerState extends State<CardsBurger> {
-
-  final List<DescriptionData> description =[
-      DescriptionData(image: 'assets/images/Rectangle.png',
-          nameOfRestaurant: 'BurgerKing', typeOfKitchen: 'Американская кухня', logo: 'assets/images/BKlogo.png'),
-    DescriptionData(image: 'assets/images/Rectangle.png',
-        nameOfRestaurant: 'BurgerKing', typeOfKitchen: 'Американская кухня', logo: 'assets/images/BKlogo.png'),
-    DescriptionData(image: 'assets/images/Rectangle.png',
-        nameOfRestaurant: 'РафБургерс', typeOfKitchen: 'Татарская кухня', logo: 'assets/images/BKlogo.png'),
+  final List<DescriptionData> description = [
+    DescriptionData(
+        image: 'assets/images/Rectangle.png',
+        nameOfRestaurant: 'BurgerKing',
+        typeOfKitchen: 'Американская кухня',
+        logo: 'assets/images/BKlogo.png'),
+    DescriptionData(
+        image: 'assets/images/Rectangle.png',
+        nameOfRestaurant: 'DunganKing',
+        typeOfKitchen: 'Дунганская кухня',
+        logo: 'assets/images/BKlogo.png'),
+    DescriptionData(
+        image: 'assets/images/Rectangle.png',
+        nameOfRestaurant: 'РафБургерс',
+        typeOfKitchen: 'Татарская кухня',
+        logo: 'assets/images/BKlogo.png'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         height: 230,
-        child: ListView(
+        child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          children: [
-            ...description.map((data) => Description(data: data)).toList(), //Место ошибки
-          ],
+          itemCount: description.length,
+          itemBuilder: (context,index) => Description(data: description[index]),
         ));
   }
 }
-class DescriptionData{
+
+class DescriptionData {
   final String image;
   final String logo;
   final String nameOfRestaurant;
   final String typeOfKitchen;
 
-  DescriptionData({required this.image,required this.logo, required this.nameOfRestaurant,required this.typeOfKitchen});
+  DescriptionData(
+      {required this.image,
+      required this.logo,
+      required this.nameOfRestaurant,
+      required this.typeOfKitchen});
 }
 
 class Description extends StatelessWidget {
-
   final DescriptionData data;
 
-
-  const Description({Key? key,required this.data }) : super(key: key);
+  const Description({Key? key, required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/restaurant');
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RestaurantScreen(
+                name: data.nameOfRestaurant,
+                typeOfKitchen: data.typeOfKitchen)));
       },
       child: Container(
         width: 315,
@@ -73,7 +86,7 @@ class Description extends StatelessWidget {
                 margin: EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7),
-                  image:  DecorationImage(
+                  image: DecorationImage(
                     image: AssetImage(data.image),
                     fit: BoxFit.cover,
                   ),
@@ -87,7 +100,7 @@ class Description extends StatelessWidget {
                       margin: EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
-                        image:  DecorationImage(
+                        image: DecorationImage(
                           image: AssetImage(data.logo),
                           fit: BoxFit.cover,
                         ),
@@ -100,7 +113,8 @@ class Description extends StatelessWidget {
                 child: ListTile(
                   title: Text(
                     data.nameOfRestaurant,
-                    style: theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700),
+                    style: theme.textTheme.bodyText1!
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   subtitle: Text(
                     data.typeOfKitchen,

@@ -1,10 +1,11 @@
-import 'package:delivery/pages/main_screen.dart';
+import 'package:delivery/presentation/features/cart/cart_screen.dart';
+import 'package:delivery/presentation/features/home/main_screen.dart';
+import 'package:delivery/presentation/features/map/map_screen.dart';
+import 'package:delivery/presentation/features/profile/profile_screen.dart';
+import 'package:delivery/presentation/features/search/search_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/cart_screen.dart';
-import '../pages/map_screen.dart';
-import '../pages/profile_screen.dart';
-import '../pages/search_screen.dart';
+
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({Key? key}) : super(key: key);

@@ -1,6 +1,10 @@
-import 'package:delivery/config/theme_provider.dart';
+
+import 'package:delivery/main_bloc.dart';
+import 'package:delivery/main_event.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -19,14 +23,15 @@ class _SettingsPageState extends State<SettingsPage> {
       body: SafeArea(
         child: Column(
           children: [
-           Consumer<ThemeProvider>(
-             builder: (context,themeProvider,child) => SwitchListTile(
-               title: Text('Dark Theme', style: Theme.of(context).textTheme.bodyText1,),
-               value: themeProvider.isDarkMode,
-               onChanged: (bool value){
-                 themeProvider.toggleTheme(value);
-               },),
-           )
+
+             SwitchListTile(
+                     title: Text('Dark Theme', style: Theme.of(context).textTheme.bodyText1,),
+                     value:  false,
+                     onChanged: (bool value){
+                       BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(isDarkMode: value));
+                     },),
+
+
           ],
         ),
       ),
