@@ -18,4 +18,12 @@ class AddToCartEvent extends CartEvent{
   List<Object?> get props => [product];
 }
 
-class RemoveFromCartEvent extends CartEvent{}
+class RemoveFromCartEvent extends CartEvent{
+  final ProductEntity product;
+
+  RemoveFromCartEvent({required this.product});
+
+  @override
+  List<Object?> get props => [product];
+
+}

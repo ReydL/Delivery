@@ -10,7 +10,9 @@ class CartRepository {
     print(products);
   }
 
-  removeProductFromCart(){}
+  removeProductFromCart(ProductEntity product){
+    products.remove(product);
+  }
 
    List <ProductEntity> getProductsOfCart() {
     return products;

@@ -96,10 +96,8 @@ List<Widget> buildDishes(List<ProductEntity> dish, BuildContext context){
                                  top: Radius.circular(16),
                                )),
                            context: context,
-                           builder: (context) => BlocProvider<CartBloc>(
-                               create: (context) => CartBloc(),
-                               child: BuildBurgerBottomSheet(dish: dish[i],))),
-                     ),
+                           builder: (context) => BuildBurgerBottomSheet(dish: dish[i],))),
+                     
                    ],
                  )),
            ],

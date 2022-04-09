@@ -5,13 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cart_event.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState>{
-  final CartRepository cartRepository = CartRepository();
-  CartBloc() : super(CartInitialState()){
+  final CartRepository _cartRepository;
+  CartBloc({required CartRepository cartRepository}) : _cartRepository = cartRepository ,super(CartInitialState()){
   on<CartLoadedEvent>((event, emit)  {
       if (state is CartInitialState){
-        final products =  cartRepository.products;
+        final products =  _cartRepository.products;
         print(products);
-        final totalPrice = cartRepository.getTotalPrice();
+        final totalPrice = _cartRepository.getTotalPrice();
         emit(CartLoadedState(products: products, totalPrice: totalPrice));
         print('cart initial state');
       }
@@ -22,9 +22,18 @@ class CartBloc extends Bloc<CartEvent, CartState>{
   },
   );
   on<AddToCartEvent>((event, emit) {
-    cartRepository.addProductToCart(event.product);
+    _cartRepository.addProductToCart(event.product);
     emit(CartInitialState());
   }
   );
+
+  on<RemoveFromCartEvent>((event, emit) {
+    var state = this.state as CartLoadedState;
+    emit(CartLoadingState());
+    _cartRepository.removeProductFromCart(event.product);
+    final products =  _cartRepository.products;
+    final totalPrice = _cartRepository.getTotalPrice();
+    emit(CartLoadedState(products: products, totalPrice: totalPrice));
+  });
   }
 }

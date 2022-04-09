@@ -24,9 +24,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     const SearchScreen(),
     const MainScreen(),
     const ProfileScreen(),
-     BlocProvider<CartBloc>(
-         create: (context) => CartBloc()..add(CartLoadedEvent()),
-         child: const  CartScreen()),
+    const CartScreen(),
   ];
   @override
   Widget build(BuildContext context) {

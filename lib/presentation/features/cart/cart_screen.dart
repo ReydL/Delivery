@@ -1,4 +1,5 @@
 import 'package:delivery/presentation/features/cart/cart_bloc.dart';
+import 'package:delivery/presentation/features/cart/cart_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,6 +7,7 @@ import '../../../domain/entities/product_entity.dart';
 import 'cart_state.dart';
 
 class CartScreen extends StatefulWidget {
+  
   const CartScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,9 +18,15 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CartBloc>(context);
+    bloc..add(CartLoadedEvent());
     final theme = Theme.of(context);
     return BlocBuilder<CartBloc,CartState>(
       builder: (context, state) {
+        if(state is CartLoadingState){
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
        if(state is CartLoadedState){
          return Scaffold(
            backgroundColor: theme.backgroundColor,
@@ -75,7 +83,9 @@ class _CartScreenState extends State<CartScreen> {
                   Text(products[i].nameOfProduct),
                   const SizedBox(width: 20,),
                   Text('${products[i].costOfProduct} Р'),
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.delete_rounded))
+                  IconButton(onPressed: (){
+                    BlocProvider.of<CartBloc>(context)..add(RemoveFromCartEvent(product: products[i]));
+                  }, icon: const Icon(Icons.delete_rounded))
                 ],
               ),
             )
