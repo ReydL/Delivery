@@ -9,18 +9,18 @@ class GreyContainers extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: [
           SizedBox(width: 16,),
-          MyGreyConteiner(),
-          MyGreyConteiner(),
-          MyGreyConteiner(),
-          MyGreyConteiner(),
+          MyGreyContainer(),
+          MyGreyContainer(),
+          MyGreyContainer(),
+          MyGreyContainer(),
         ],
       ),
     );
   }
 }
 
-class MyGreyConteiner extends StatelessWidget {
-  const MyGreyConteiner({Key? key}) : super(key: key);
+class MyGreyContainer extends StatelessWidget {
+  const MyGreyContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class MyGreyConteiner extends StatelessWidget {
         color: Colors.grey,
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: EdgeInsets.only(right: 7),
+      margin:const EdgeInsets.only(right: 7),
     );
   }
 }

@@ -1,29 +1,17 @@
+import 'package:delivery/data/repositories/restaurant_repository.dart';
+import 'package:delivery/domain/entities/restaurant_entity.dart';
 import 'package:delivery/presentation/features/restaurant/restaurant_screen.dart';
 import 'package:flutter/material.dart';
 
 class CardsBurger extends StatefulWidget {
+  const CardsBurger({Key? key}) : super(key: key);
+
   @override
   State<CardsBurger> createState() => _CardsBurgerState();
 }
 
 class _CardsBurgerState extends State<CardsBurger> {
-  final List<DescriptionData> description = [
-    DescriptionData(
-        image: 'assets/images/Rectangle.png',
-        nameOfRestaurant: 'BurgerKing',
-        typeOfKitchen: 'Американская кухня',
-        logo: 'assets/images/BKlogo.png'),
-    DescriptionData(
-        image: 'assets/images/Rectangle.png',
-        nameOfRestaurant: 'DunganKing',
-        typeOfKitchen: 'Дунганская кухня',
-        logo: 'assets/images/BKlogo.png'),
-    DescriptionData(
-        image: 'assets/images/Rectangle.png',
-        nameOfRestaurant: 'РафБургерс',
-        typeOfKitchen: 'Татарская кухня',
-        logo: 'assets/images/BKlogo.png'),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,44 +19,32 @@ class _CardsBurgerState extends State<CardsBurger> {
         height: 230,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: description.length,
-          itemBuilder: (context,index) => Description(data: description[index]),
+          itemCount: RestaurantsDataStorage().popularRestaurants.length,
+          itemBuilder: (context,index) => Description(restaurant: RestaurantsDataStorage().popularRestaurants[index]),
         ));
   }
 }
 
-class DescriptionData {
-  final String image;
-  final String logo;
-  final String nameOfRestaurant;
-  final String typeOfKitchen;
 
-  DescriptionData(
-      {required this.image,
-      required this.logo,
-      required this.nameOfRestaurant,
-      required this.typeOfKitchen});
-}
 
 class Description extends StatelessWidget {
-  final DescriptionData data;
+  final RestaurantEntity restaurant;
 
-  const Description({Key? key, required this.data}) : super(key: key);
+  const Description({Key? key, required this.restaurant}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
       onTap: () {
+
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => RestaurantScreen(
-                name: data.nameOfRestaurant,
-                typeOfKitchen: data.typeOfKitchen)));
+            MaterialPageRoute(builder: (context) => RestaurantScreen(restaurant: restaurant,)));
       },
       child: Container(
         width: 315,
         height: 230,
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           left: 6,
           top: 8,
           right: 7,
@@ -87,7 +63,7 @@ class Description extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7),
                   image: DecorationImage(
-                    image: AssetImage(data.image),
+                    image: AssetImage(restaurant.image ?? ''),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -97,11 +73,11 @@ class Description extends StatelessWidget {
                     Container(
                       width: 40,
                       height: 40,
-                      margin: EdgeInsets.all(6),
+                      margin: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
                         image: DecorationImage(
-                          image: AssetImage(data.logo),
+                          image: AssetImage(restaurant.logo ?? ''),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -109,19 +85,17 @@ class Description extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                child: ListTile(
-                  title: Text(
-                    data.nameOfRestaurant,
-                    style: theme.textTheme.bodyText1!
-                        .copyWith(fontWeight: FontWeight.w700),
-                  ),
-                  subtitle: Text(
-                    data.typeOfKitchen,
-                    style: theme.textTheme.subtitle1,
-                  ),
-                  trailing: Icon(Icons.attach_money),
+              ListTile(
+                title: Text(
+                  restaurant.nameOfRestaurant,
+                  style: theme.textTheme.bodyText1!
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
+                subtitle: Text(
+                  restaurant.typeOfKitchen,
+                  style: theme.textTheme.subtitle1,
+                ),
+                trailing: const Icon(Icons.attach_money),
               ),
             ],
           ),

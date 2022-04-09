@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../widgets/top_row.dart';
@@ -21,42 +20,44 @@ class _SearchScreenState extends State<SearchScreen> {
         title: TopRow(),
       ),
       body: ListView(children: [
-        Column(
-          children: [
-            SizedBox(
-              height: 37,
-            ),
-            RowOfSearch(),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              'Популярный выбор',
-              style:  theme.textTheme.headline5,
-            ),
-            GridOfRestaurants()
-          ],
+        const SizedBox(
+          height: 37,
         ),
+        const RowOfSearch(),
+        const SizedBox(
+          height: 50,
+        ),
+        Text(
+          'Популярный выбор',
+          style: theme.textTheme.headline5,
+        ),
+        GridOfRestaurants()
       ]),
     );
   }
 }
 
 class GridOfRestaurants extends StatelessWidget {
-  final List <ElementOfGridRestaurantsData> elements = [
-    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
-    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
-    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
-    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
-    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
-    ElementOfGridRestaurantsData(image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+  final List<ElementOfGridRestaurantsData> elements = [
+    ElementOfGridRestaurantsData(
+        image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(
+        image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(
+        image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(
+        image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(
+        image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
+    ElementOfGridRestaurantsData(
+        image: 'assets/images/pizzaPNG.png', nameOfImage: 'Пицца'),
   ];
   GridOfRestaurants({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
       child: Wrap(
         spacing: 30,
         runSpacing: 10,
@@ -67,16 +68,19 @@ class GridOfRestaurants extends StatelessWidget {
     );
   }
 }
+
 class ElementOfGridRestaurantsData {
   final String image;
   final String nameOfImage;
 
-  ElementOfGridRestaurantsData({required this.image,required this.nameOfImage});
+  ElementOfGridRestaurantsData(
+      {required this.image, required this.nameOfImage});
 }
-class ElementOfGridRestaurants extends StatelessWidget{
 
+class ElementOfGridRestaurants extends StatelessWidget {
   final ElementOfGridRestaurantsData data;
-  const ElementOfGridRestaurants({Key? key, required this.data}) : super(key: key);
+  const ElementOfGridRestaurants({Key? key, required this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +99,9 @@ class ElementOfGridRestaurants extends StatelessWidget{
               ),
             ),
           ),
-          SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           Text(
             data.nameOfImage,
             style: theme.textTheme.subtitle1,
@@ -125,7 +131,8 @@ class RowOfSearch extends StatelessWidget {
         ),
         subtitle: Text(
           'Например, свинные ребрышки',
-          style: theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600),
+          style:
+              theme.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600),
         ),
       ),
     );

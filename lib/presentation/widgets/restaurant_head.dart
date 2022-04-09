@@ -13,7 +13,7 @@ class RestaurantHead extends StatelessWidget {
           Container(
             height: 105,
             width: 375,
-            decoration: BoxDecoration(
+            decoration:const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/Rectangle.png'),
                 fit: BoxFit.cover,
@@ -27,7 +27,7 @@ class RestaurantHead extends StatelessWidget {
             child: Container(
               height: 115,
               width: 115,
-              decoration: BoxDecoration(
+              decoration:const BoxDecoration(
 
                 shape: BoxShape.circle,
                 image: DecorationImage(

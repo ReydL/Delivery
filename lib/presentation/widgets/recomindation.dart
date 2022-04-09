@@ -11,7 +11,7 @@ class Recomindation extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 160,
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -37,31 +37,29 @@ class RecBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 86,
-            height: 86,
-            margin: EdgeInsets.only(left: 11, top: 29, right: 11, bottom: 5),
-            decoration: BoxDecoration(
-              color: Colors.orange,
-              borderRadius: BorderRadius.circular(7),
-              image: DecorationImage(
-                image: AssetImage(data.image),
-                fit: BoxFit.cover,
-              ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: 86,
+          height: 86,
+          margin: const EdgeInsets.only(left: 11, top: 29, right: 11, bottom: 5),
+          decoration: BoxDecoration(
+            color: Colors.orange,
+            borderRadius: BorderRadius.circular(7),
+            image: DecorationImage(
+              image: AssetImage(data.image),
+              fit: BoxFit.cover,
             ),
           ),
-          Text(
-            data.text,
-            style: theme.textTheme.subtitle1,
-            textAlign: TextAlign.center,
-            softWrap: true,
-          ),
-        ],
-      ),
+        ),
+        Text(
+          data.text,
+          style: theme.textTheme.subtitle1,
+          textAlign: TextAlign.center,
+          softWrap: true,
+        ),
+      ],
     );
   }
 }

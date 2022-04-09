@@ -1,55 +1,36 @@
+import 'package:delivery/domain/entities/restaurant_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/repositories/restaurant_repository.dart';
 import '../features/restaurant/restaurant_screen.dart';
 
 class ListOfRestaurantCard extends StatelessWidget {
 
-  final List<RestaurantCardData> cards = [
-    RestaurantCardData(image: 'assets/images/Rectangle.png', logo: 'assets/images/BKlogo.png',
-        nameOfRestaurant: 'Burger King',typeOfKitchen:  'Американская кухня',
-        timeOfDelivery:  '10-20 минут', costOfDelivery: 'Доставка: 100 Р'),
-    RestaurantCardData(image: 'assets/images/Rectangle.png', logo: 'assets/images/BKlogo.png',
-        nameOfRestaurant: 'Burger King',typeOfKitchen:  'Американская кухня',
-        timeOfDelivery:  '15-20 минут', costOfDelivery: 'Доставка: 200 Р'),
-    RestaurantCardData(image: 'assets/images/Rectangle.png', logo: 'assets/images/BKlogo.png',
-        nameOfRestaurant: 'Burger King',typeOfKitchen:  'Американская кухня',
-        timeOfDelivery:  '15-30 минут', costOfDelivery: 'Доставка: 150 Р'),
-  ];
+
 
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...cards.map((data) => RestaurantCard(data: data)),
+        ...RestaurantsDataStorage().allRestaurants.map((data) => RestaurantCard(restaurant: data)),
       ],
     );
   }
 }
 
-class RestaurantCardData {
-  final String image;
-  final String logo;
-  final String nameOfRestaurant;
-  final String typeOfKitchen;
-  final String timeOfDelivery;
-  final String costOfDelivery;
-
-  RestaurantCardData({required this.image,required this.logo,required this.nameOfRestaurant,
-     required this.typeOfKitchen,required this.timeOfDelivery,required this.costOfDelivery});
-}
 
 class RestaurantCard extends StatelessWidget {
-  final RestaurantCardData data;
+  final RestaurantEntity restaurant;
 
-  const RestaurantCard({Key? key,required this.data}) : super(key: key);
+  const RestaurantCard({Key? key,required this.restaurant}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
       width: 363,
       height: 260,
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         left: 6,
         bottom: 6,
         right: 6,
@@ -61,107 +42,99 @@ class RestaurantCard extends StatelessWidget {
         onTap: () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => RestaurantScreen(
-                  name: data.nameOfRestaurant,
-                  typeOfKitchen: data.typeOfKitchen,costOfDel: data.costOfDelivery,timeOfDel: data.timeOfDelivery,)));
+              MaterialPageRoute(builder: (context) => RestaurantScreen(restaurant: restaurant,)));
         },
         child: Card(
           color: theme.bottomNavigationBarTheme.backgroundColor,
-          child: Container(
-            child: Column(
-              children: [
-                Container(
-                  width: 351,
-                  height: 127,
-                  margin: EdgeInsets.fromLTRB(6, 6, 6, 6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7),
-                    image: DecorationImage(
-                      image: AssetImage(data.image),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.bottomLeft,
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        margin: EdgeInsets.fromLTRB(6, 6, 6, 6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          image: DecorationImage(
-                            image: AssetImage(data.logo),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )
-                    ],
+          child: Column(
+            children: [
+              Container(
+                width: 351,
+                height: 127,
+                margin: EdgeInsets.fromLTRB(6, 6, 6, 6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7),
+                  image: DecorationImage(
+                    image: AssetImage(restaurant.image ?? ''),
+                    fit: BoxFit.cover,
                   ),
                 ),
-                Container(
-                  child: ListTile(
-                    title: Text(
-                      data.nameOfRestaurant,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.bold,
+                child: Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      margin: EdgeInsets.fromLTRB(6, 6, 6, 6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7),
+                        image: DecorationImage(
+                          image: AssetImage(restaurant.logo ?? ''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                    )
+                  ],
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  restaurant.nameOfRestaurant,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Nunito',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(
+                  restaurant.typeOfKitchen,
+                  style:const  TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Nunito',
+                  ),
+                ),
+                trailing: const Icon(Icons.attach_money),
+              ),
+              Row(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: 91,
+                    height: 23,
+                    margin: EdgeInsets.only(left: 12, right: 7),
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    subtitle: Text(
-                      data.typeOfKitchen,
-                      style: TextStyle(
+                    child: Text(
+                      restaurant.timeOfDel ?? '',
+                      style: const TextStyle(
+                        fontFamily: 'Nunito',
                         fontSize: 14,
-                        fontFamily: 'Nunito',
+                        color: Colors.white,
                       ),
                     ),
-                    trailing: Icon(Icons.attach_money),
                   ),
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        width: 91,
-                        height: 23,
-                        margin: EdgeInsets.only(left: 12, right: 7),
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          data.timeOfDelivery,
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: 136,
+                    height: 23,
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      restaurant.costOfDel ?? '',
+                      style: const TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 14,
+                        color: Colors.white,
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        width: 136,
-                        height: 23,
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          data.costOfDelivery,
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                )
-              ],
-            ),
+                ],
+              )
+            ],
           ),
         ),
       ),
