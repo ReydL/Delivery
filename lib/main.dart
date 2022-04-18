@@ -1,18 +1,18 @@
 import 'package:delivery/config/app_theme.dart';
-import 'package:delivery/config/theme_provider.dart';
 import 'package:delivery/data/repositories/cart_repository.dart';
 import 'package:delivery/main_bloc.dart';
 import 'package:delivery/main_state.dart';
 import 'package:delivery/presentation/features/cart/cart_bloc.dart';
 import 'package:delivery/presentation/features/cart/cart_event.dart';
+import 'package:delivery/presentation/features/navigation/navigation_cubit.dart';
+import 'package:delivery/presentation/features/profile/profile_bloc.dart';
 import 'package:delivery/presentation/features/settings/settings_page.dart';
-import 'package:delivery/presentation/widgets/bottom_navigation.dart';
+import 'package:delivery/presentation/features/navigation/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
-import 'presentation/features/restaurant/restaurant_screen.dart';
-import 'package:delivery/data/repositories/cart_repository.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +30,9 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
           providers:[
             BlocProvider(create: (context)=>CartBloc(cartRepository: context.read<CartRepository>())..add(CartLoadedEvent())),
-            BlocProvider(create: (context)=> ThemeBloc())
+            BlocProvider(create: (context)=> ThemeBloc()),
+            BlocProvider(create: (context)=> NavigationCubit()),
+            BlocProvider(create: (context)=> ProfileBloc())
           ],
         child: BlocBuilder<ThemeBloc,ThemeState>(builder: (context, state) {
           return MaterialApp(
@@ -39,9 +41,9 @@ class MyApp extends StatelessWidget {
             theme: LightAppTheme.of(context),
             darkTheme: DarkAppTheme.of(context),
             routes: {
-              '/': (context) => MyBottomNavigationBar(),
+              '/': (context) => const MyBottomNavigationBar(),
 
-              '/settings': (context) => SettingsPage(),
+              '/settings': (context) => const SettingsPage(),
             },
           );
         } ),)

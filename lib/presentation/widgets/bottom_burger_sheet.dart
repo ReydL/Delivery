@@ -72,7 +72,8 @@ class _BuildBurgerBottomSheetState extends State<BuildBurgerBottomSheet> {
                       )
                   ),
                   onPressed: (){
-                    BlocProvider.of<CartBloc>(context).add(AddToCartEvent(product: widget.dish));
+                    bloc.add(AddToCartEvent(product: widget.dish));
+                    Navigator.pop(context);
 
                   },
                   child:  Text('Добавить за ${widget.dish.costOfProduct} Р'),

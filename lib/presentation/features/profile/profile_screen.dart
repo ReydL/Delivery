@@ -1,6 +1,10 @@
 import 'package:delivery/config/user_preference.dart';
+import 'package:delivery/presentation/features/profile/profile_bloc.dart';
+import 'package:delivery/presentation/features/profile/profile_event.dart';
+import 'package:delivery/presentation/features/profile/profile_state.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -20,7 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  padding: EdgeInsets.only(top: 50),
+                  padding: const EdgeInsets.only(top: 50),
                   child: Column(
                     children: [
                       Text(
@@ -116,15 +120,11 @@ class AdressRow extends StatefulWidget {
 }
 
 class _AdressRowState extends State<AdressRow> {
-  String? address;
-  final _storage = UserPreference();
-  String preadress = '';
-
+  String preaddress = '';
   @override
   void initState() {
     super.initState();
 
-    getAddress();
     // print(address);
   }
 
@@ -148,15 +148,17 @@ class _AdressRowState extends State<AdressRow> {
               fontSize: 10,
             ),
           ),
-          subtitle: address == null
-              ? const Text('')
-              : Text(
-                  address!,
-                  style: theme.textTheme.bodyText1,
-                ),
+          subtitle: BlocBuilder<ProfileBloc,ProfileState>(
+            builder: (context,state){
+              if(state is ProfileLoadedState){
+                return Text(state.address);
+              }
+              return Text('');
+            },
+          ),
           trailing: TextButton(
             onPressed: () {
-              getAddress();
+
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -168,7 +170,7 @@ class _AdressRowState extends State<AdressRow> {
                       ),
                       content: TextField(
                         onChanged: (String value) {
-                          preadress = value;
+                          preaddress = value;
                         },
                       ),
                       actions: [
@@ -179,11 +181,9 @@ class _AdressRowState extends State<AdressRow> {
                                   .copyWith(color: theme.primaryColor),
                             ),
                             onPressed: () {
-                              setState(() {
-                                address = preadress;
-                                _storage.setAddress(preadress);
+                                BlocProvider.of<ProfileBloc>(context).add(ProfileChangedAddress(address: preaddress));
                                 Navigator.of(context).pop();
-                              });
+
                             }),
                         TextButton(
                             child: Text('Отмена',
@@ -208,8 +208,5 @@ class _AdressRowState extends State<AdressRow> {
   }
 
 
-  Future<void> getAddress() async {
-    final addressTwo = await _storage.getAddress();
-    setState(() => address = addressTwo);
-  }
+
 }
